@@ -1,0 +1,35 @@
+#welcome {
+    height: 45px;
+    padding-left: 15px;
+    margin-left: 15px;
+    margin_right: 20px;
+    font: 500 18px 黑体;
+    border: solid 5px;
+    border-radius: 5px;
+}
+
+QMainWindow {
+    min-width: 680px;
+    min-height: 440px;
+    max-width: 680px;
+    max-height: 440px;
+}
+
+#left_btn {
+    width: 100px;
+    height: 45px;
+    margin-left: 20px;
+    font: 500 15px 黑体;
+    border-radius: 5px;
+    background-color: #FFEFD5;
+}
+
+#left_btn:checked {
+    width: 100px;
+    height: 45px;
+    margin-left: 20px;
+    font: 500 18px 黑体;
+    border-radius: 5px;
+    background-color: #FF8C00;
+    color: wheat;
+}

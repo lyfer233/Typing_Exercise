@@ -18,3 +18,7 @@ class WindowConstants:
     WINDOW_WIDTH = 1280
     WINDOW_HEIGHT = 720
 
+class MainPageConstants:
+    MAINPAGE_QSS_FILE_PATH = os.path.join(os.path.join(WORK_PATH, 'QSSTool'), 'mainpage.qss')
+    MAINPAGE_WELCOME = 'Welcome typing exercise!'
+

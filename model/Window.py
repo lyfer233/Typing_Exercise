@@ -14,6 +14,13 @@ from QSSTool import QSSTool
 class Window(QMainWindow):
     # TODO(lyfer): Adding the Window class comment
 
+    # pages switch signal
+    main_page_signal = pyqtSignal()
+    words_exercise_page = pyqtSignal()
+    articles_exercise_page = pyqtSignal()
+    your_log_page = pyqtSignal()
+
+
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
@@ -56,7 +63,7 @@ class Window(QMainWindow):
         '''
         btn_name_list = ['Main', 'Words Exercise', 'Articles Exercise', 'Your Log']
         btn_click_event_list = [
-            self.__main_page, self.__words_Exercise_page, self.__Articles_exercise_page,
+            self.__main_page, self.__words_exercise_page, self.__articles_exercise_page,
             self.__your_log_page,
         ]
 
@@ -108,3 +115,19 @@ class Window(QMainWindow):
         hbox.setStretch(2, 7)
 
         widget.setLayout(hbox)
+
+    '''
+    These are signal function area
+    '''
+
+    def __main_page(self): # send the main page signal
+        self.main_page_signal.emit()
+
+    def __words_exercise_page(self): # send words exercise page signal
+        self.words_exercise_page.emit()
+
+    def __articles_exercise_page(self): # send articles exercise page signal
+        self.articles_exercise_page.emit()
+
+    def __your_log_page(self): # send log page signal
+        self.your_log_page.emit()
