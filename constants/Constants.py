@@ -8,8 +8,8 @@ class WindowConstants:
     Attributes:
     '''
     WINDOW_WORK_PATH = WORK_PATH
-    WINDOW_QSS_FILE_PATH = os.path.join(os.path.join(WORK_PATH, 'QSSTool'), 'windows.qss')
-    WINDOW_ICON_PATH = os.path.join(os.path.join(os.path.join(WORK_PATH, 'resouce'), 'images'), 'my_icon.png')
+    WINDOW_QSS_FILE_PATH = os.path.join(os.path.join(WORK_PATH, 'QSSTool'), 'window.qss')
+    WINDOW_ICON_PATH = os.path.join(os.path.join(os.path.join(WORK_PATH, 'resource'), 'images'), 'my_icon.png')
 
     WINDOW_WELCOME_MESSAGE = 'Typing Exercise help you speed up! This is v0.1~'
     WINDOW_TITLE = 'Typing Exercise'

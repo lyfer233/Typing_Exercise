@@ -11,7 +11,7 @@ class QSSTool:
 
         if file_path is not None:
             try:
-                with open("file_path", "r", encoding='utf-8') as qss:
+                with open(str(file_path), "r", encoding='utf-8') as qss:
                     widget.setStyleSheet(qss.read())
             except:
                 print(file_path, 'This qss file not found!')
@@ -19,7 +19,7 @@ class QSSTool:
         elif file_path_list is not None:
             for path in file_path_list:
                 try:
-                    with open(path, "r", encoding='utf-8') as qss:
+                    with open(str(path), "r", encoding='utf-8') as qss:
                         widget.setStyleSheet(qss.read())
                 except:
                     print(path, 'This qss file not found!')
