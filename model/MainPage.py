@@ -27,6 +27,6 @@ class MainPage(Window):
 
         welcome_label = QLabel(mpc.MAINPAGE_WELCOME)
         welcome_label.setObjectName('welcome')
-        vbox.addWidget(welcome_label)
+        vbox.addWidget(welcome_label, 0, Qt.AlignCenter | Qt.AlignVCenter)
 
         return vbox
