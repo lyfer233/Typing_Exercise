@@ -3,8 +3,14 @@ This project purpose is speed up your typing by some exercises in the multi-plat
 
 
 ## Build Environment
-Software Environment: Python 3.9 + PyQt5   
+Software Environment: Python 3.9 + PyQt5 
 System Environment: Windows 11
 
-## function 
+## Function
+
+
+
+# Reference
+
+TOFEL Wordlist using this [GitHub repo](https://github.com/1eez/103976)
 
