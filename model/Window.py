@@ -1,15 +1,13 @@
-import sys
-
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QMainWindow, QPushButton,
-    QDesktopWidget, QHBoxLayout, QVBoxLayout, QAction,
-    QButtonGroup, qApp
+    QWidget, QMainWindow, QPushButton,
+    QDesktopWidget, QHBoxLayout, QVBoxLayout, QButtonGroup
 )
 
-from constants import WindowConstants as wc
 from QSSTool import QSSTool
+from constants import WindowConstants as wc
+
 
 class Window(QMainWindow):
     # TODO(lyfer): Adding the Window class comment
@@ -19,31 +17,29 @@ class Window(QMainWindow):
     words_exercise_page = pyqtSignal()
     articles_exercise_page = pyqtSignal()
     your_log_page = pyqtSignal()
-
+    pk_page = pyqtSignal()
 
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
 
     def initUI(self):
-        '''
+        """
         Configure your window UI
 
         :return: None
-        '''
+        """
         self.center()
         self.__layout()
         QSSTool.qss(self, wc.WINDOW_QSS_FILE_PATH)
         self.setWindowTitle(wc.WINDOW_TITLE)
         self.setWindowIcon(QIcon(wc.WINDOW_ICON_PATH))
 
-
-
     def center(self):
-        '''
+        """
         Take the windows into your center of screen
 
         :return: None
-        '''
+        """
 
         self.resize(wc.WINDOW_WIDTH, wc.WINDOW_HEIGHT)
 
@@ -56,15 +52,15 @@ class Window(QMainWindow):
         )
 
     def left_layout(self):
-        '''
+        """
         Main Window left bar layout
 
         :return: QVBoxLayout
-        '''
-        btn_name_list = ['Main', 'Words Exercise', 'Articles Exercise', 'Your Log']
+        """
+        btn_name_list = ['Main', 'Words Exercise', 'Articles Exercise', 'PK', 'Your Log']
         btn_click_event_list = [
             self.__main_page, self.__words_exercise_page, self.__articles_exercise_page,
-            self.__your_log_page,
+            self.__pk_page, self.__your_log_page,
         ]
 
         vbox = QVBoxLayout()
@@ -72,8 +68,8 @@ class Window(QMainWindow):
 
         for name, btn_click_event in zip(btn_name_list, btn_click_event_list):
             now_button = QPushButton(name)
-            now_button.setCursor(Qt.PointingHandCursor) # take your shape of cursor from pointer to hand
-            now_button.setObjectName('left_btn') # set button id
+            now_button.setCursor(Qt.PointingHandCursor)  # take your shape of cursor from pointer to hand
+            now_button.setObjectName('left_btn')  # set button id
             now_button.setChecked(True)
             now_button.clicked.connect(btn_click_event)
 
@@ -85,21 +81,21 @@ class Window(QMainWindow):
         return vbox
 
     def right_layout(self):
-        '''
+        """
         Override the method by the child window
 
         :return: QVBoxLayout()
-        '''
+        """
 
         vbox = QVBoxLayout()
         return vbox
 
     def __layout(self):
-        '''
+        """
         Merge left and right layouts and set details
 
         :return: None
-        '''
+        """
         widget = QWidget()
         self.setCentralWidget(widget)
 
@@ -120,14 +116,17 @@ class Window(QMainWindow):
     These are signal function area
     '''
 
-    def __main_page(self): # send the main page signal
+    def __main_page(self):  # send the main page signal
         self.main_page_signal.emit()
 
-    def __words_exercise_page(self): # send words exercise page signal
+    def __words_exercise_page(self):  # send words exercise page signal
         self.words_exercise_page.emit()
 
-    def __articles_exercise_page(self): # send articles exercise page signal
+    def __articles_exercise_page(self):  # send articles exercise page signal
         self.articles_exercise_page.emit()
 
-    def __your_log_page(self): # send log page signal
+    def __pk_page(self):  # send pk page signal
+        self.pk_page.emit()
+
+    def __your_log_page(self):  # send log page signal
         self.your_log_page.emit()

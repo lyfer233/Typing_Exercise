@@ -1,0 +1,21 @@
+QMainWindow {
+    min-width: 1280px;
+    min-height: 720px;
+    max-width: 1280px;
+    max-height: 720px;
+}
+
+#left_btn {
+    width: 100px;
+    height: 45px;
+    margin-left: 20px;
+    font: 500 15px 黑体;
+    border-radius: 5px;
+    background-color: #ffefd5;
+}
+
+#left_btn:checked {
+    background-color: #ff8c00;
+    color: wheat;
+}
+

@@ -1,9 +1,6 @@
-import sys
-
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QWidget, QApplication, QPushButton, QLineEdit,
-    QTextEdit, QHBoxLayout, QVBoxLayout, QLabel,
+    QVBoxLayout, QLabel,
 )
 
 from model import Window
