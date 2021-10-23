@@ -4,6 +4,7 @@ WORK_PATH = os.getcwd()
 QSSTOOL_PATH = os.path.join(WORK_PATH, 'QSSTool')
 ICON_PATH = os.path.join(os.path.join(WORK_PATH, 'resource'), 'images')
 
+
 class WindowConstants:
     '''
     TODO(lyfer): Adding the WindowConstants class comment
@@ -20,9 +21,11 @@ class WindowConstants:
     WINDOW_WIDTH = 1280
     WINDOW_HEIGHT = 720
 
+
 class MainPageConstants:
     MAINPAGE_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'mainpage.qss')
     MAINPAGE_WELCOME = 'Welcome typing exercise!'
+
 
 class WordsExercisePageConstants:
     WORDS_EXERCISE_PAGE_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'words_exercise_page.qss')
@@ -30,3 +33,14 @@ class WordsExercisePageConstants:
     WORDS_EXERCISE_PAGE_QSS_FILE_PAUSE_ICON_PATH = os.path.join(ICON_PATH, 'pause.svg')
 
 
+class WordsTableConstants:
+    TABLE_QSS_FILE_PATH = os.path.join(WORK_PATH, 'wordstable.qss')
+
+    TABLE_DATA_SHOW_COUNT = 10  # it show data on the per page.
+    TABLE_DEFAULT_ROW = 10
+    TABLE_DEFAULT_COLUMN = 3
+
+    TABLE_HEADER_LIST = ['Word', 'translation', 'operate']
+
+    TABLE_HEADER_HEIGHT = 29
+    TABLE_ROW_HEIGHT = 39

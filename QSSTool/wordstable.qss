@@ -1,0 +1,163 @@
+QTableWidget {
+    background-color:rgb(240,240,240);
+    color: #1A1A1A;
+    selection-background-color: #ffcc33;
+    selection-color: deepgray;
+}
+
+QHeaderView::section {
+    border: 1px solid gray;
+    font: 500 15px 黑体;
+}
+
+/* 页码控制器按钮样式 */
+#home_page,
+#last_page,
+#page1,
+#page2,
+#page3,
+#page4,
+#page5,
+#next_page,
+#finally_page,
+#confirm {
+  background-color: none;
+  border: 2px solid #dddddd;
+  border-radius: 3px;
+  max-height: 20px;
+  font-size: 10px;
+}
+
+/* 页码按钮选中样式 */
+#page1:checked,
+#page2:checked,
+#page3:checked,
+#page4:checked,
+#page5:checked {
+  background-color: blue;
+  color: white;
+}
+
+/* 首页、尾页、上一页、下一页、确定按钮样式 */
+#home_page:pressed,
+#last_page:pressed,
+#finally_page:pressed,
+#next_page:pressed,
+#confirm:pressed {
+  background-color: #2a7cf8;
+  color: wheat;
+}
+
+/* 首页样式 */
+#home_page {
+  width: 40px;
+  margin-left: 0;
+}
+
+/* 上一页样式 */
+#last_page {
+  width: 65px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* 尾页样式 */
+#finally_page {
+  width: 40px;
+  margin-left: 5px;
+}
+
+/* 下一页样式 */
+#next_page {
+  width: 65px;
+  margin-left: 5px;
+}
+
+/* 页码按钮样式 */
+#page1,
+#page2,
+#page3,
+#page4,
+#page5 {
+  width: 20px;
+  margin-left: 0px;
+}
+
+#confirm {
+  width: 40px;
+  margin-left: 5px;
+}
+
+/* 页码控制器行编辑样式 */
+QLineEdit{
+    background-color: none;
+    max-width: 80px;
+    max-height: 20px;
+    margin-left: 0;
+}
+
+/* 页码控制器中的标签样式 */
+#total_page, #skip_to, #skip_page, #skip_page_to {
+    background-color: none;
+    border: 2px solid #DDDDDD;
+    border-radius: 3px;
+    max-height: 20px;
+    font-size: 10px;
+}
+
+#total_page {
+    width: 65px;
+    margin-left: 5px;
+}
+
+#skip_to {
+    width: 40px;
+    margin-left: 5px;
+}
+
+#skip_page {
+    width: 20px;
+    margin-left: 5px;
+}
+
+#skip_page_to {
+    width: 40px;
+    margin-left: 5px;
+}
+
+/* 删除按钮样式 */
+#delete {
+    margin-left: 0;
+    font: 500 12px 宋体;
+    border: 1px solid #808080;
+    background-color: #333333;
+    color: #CCCCCC;
+    border-radius: 0;
+}
+
+/* 修改按钮样式 */
+#update {
+    margin-left: 0;
+    font: 500 12px 宋体;
+    border: 1px solid #808080;
+    background-color: #555555;
+    color: #33cccc;
+    border-radius: 0;
+}
+
+/* 复制按钮样式 */
+#copy {
+    margin-left: 0;
+    margin-right: 0;
+    font: 500 12px 宋体;
+    border: 1px solid #808080;
+    background-color: #444444;
+    color: #99ffcc;
+    border-radius: 0;
+}
+
+/* 点击样式 */
+#delete::pressed, #update::pressed, #copy::pressed {
+    background-color: blue;
+    color: white;
+}

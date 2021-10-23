@@ -15,9 +15,11 @@ class Window(QMainWindow):
     # pages switch signal
     main_page_signal = pyqtSignal()
     words_exercise_page = pyqtSignal()
+    words_table_page = pyqtSignal()
     articles_exercise_page = pyqtSignal()
-    your_log_page = pyqtSignal()
     pk_page = pyqtSignal()
+    your_log_page = pyqtSignal()
+
 
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
@@ -57,10 +59,10 @@ class Window(QMainWindow):
 
         :return: QVBoxLayout
         """
-        btn_name_list = ['Main', 'Words Exercise', 'Articles Exercise', 'PK', 'Your Log']
+        btn_name_list = ['Main', 'Words Exercise', 'Words Table','Articles Exercise', 'PK', 'Your Log']
         btn_click_event_list = [
             self.__main_page, self.__words_exercise_page, self.__articles_exercise_page,
-            self.__pk_page, self.__your_log_page,
+            self.__words_table_page, self.__pk_page, self.__your_log_page,
         ]
 
         vbox = QVBoxLayout()
@@ -121,6 +123,9 @@ class Window(QMainWindow):
 
     def __words_exercise_page(self):  # send words exercise page signal
         self.words_exercise_page.emit()
+
+    def __words_table_page(self): # send words table page signal
+        self.words_table_page.emit()
 
     def __articles_exercise_page(self):  # send articles exercise page signal
         self.articles_exercise_page.emit()

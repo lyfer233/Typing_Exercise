@@ -6,15 +6,20 @@ QMainWindow {
 }
 
 #left_btn {
-    width: 100px;
-    height: 45px;
-    margin-left: 20px;
-    font: 500 15px 黑体;
+    width: 160px;
+    height: 60px;
+    margin-left: 15px;
+    font: 400 15px 黑体;
     border-radius: 5px;
-    background-color: #ffefd5;
+    background-color: #FFEFD5;
 }
 
 #left_btn:checked {
-    background-color: #ff8c00;
+    width: 160px;
+    height: 60px;
+    margin-left: 15px;
+    font: 400 15px 黑体;
+    border-radius: 5px;
+    background-color: #FF8C00;
     color: wheat;
 }
