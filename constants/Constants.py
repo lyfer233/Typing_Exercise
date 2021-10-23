@@ -6,10 +6,10 @@ ICON_PATH = os.path.join(os.path.join(WORK_PATH, 'resource'), 'images')
 
 
 class WindowConstants:
-    '''
+    """
     TODO(lyfer): Adding the WindowConstants class comment
     Attributes:
-    '''
+    """
     WINDOW_WORK_PATH = WORK_PATH
     WINDOW_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'window.qss')
     WINDOW_ICON_PATH = os.path.join(ICON_PATH, 'keyboard.svg')
@@ -44,3 +44,12 @@ class WordsTableConstants:
 
     TABLE_HEADER_HEIGHT = 29
     TABLE_ROW_HEIGHT = 39
+
+
+class SearchConstants:
+    UPDATE_OK_MESSAGE = 'Translation has updated successful!'
+    UPDATE_NO_MESSAGE = 'Translation has updated failed'
+    DELETE_OK_MESSAGE = 'Delete successful!'
+    DELETE_NO_MESSAGE = 'Delete Failed'
+    COPY_OK_MESSAGE = "Copied to clipboard!"
+    COPY_NO_MESSAGE = 'Copied failed'
