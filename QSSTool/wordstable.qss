@@ -51,7 +51,7 @@ QHeaderView::section {
   border: 2px solid #dddddd;
   border-radius: 3px;
   max-height: 20px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 /* 页码按钮选中样式 */
@@ -128,7 +128,7 @@ QLineEdit{
     border: 2px solid #DDDDDD;
     border-radius: 3px;
     max-height: 20px;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 #total_page {
@@ -152,7 +152,7 @@ QLineEdit{
 }
 
 /* 删除按钮样式 */
-#delete {
+#Delete {
     margin-left: 0;
     font: 500 12px 宋体;
     border: 1px solid #808080;
@@ -162,7 +162,7 @@ QLineEdit{
 }
 
 /* 修改按钮样式 */
-#update {
+#Update {
     margin-left: 0;
     font: 500 12px 宋体;
     border: 1px solid #808080;
@@ -172,7 +172,7 @@ QLineEdit{
 }
 
 /* 复制按钮样式 */
-#copy {
+#Copy {
     margin-left: 0;
     margin-right: 0;
     font: 500 12px 宋体;
@@ -183,7 +183,7 @@ QLineEdit{
 }
 
 /* 点击样式 */
-#delete::pressed, #update::pressed, #copy::pressed {
+#Delete::pressed, #Update::pressed, #Copy::pressed {
     background-color: blue;
     color: white;
 }

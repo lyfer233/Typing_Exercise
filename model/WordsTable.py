@@ -151,7 +151,7 @@ class TableWidget(QWidget):
         hbox.setContentsMargins(0, 0, 0, 0)
         hbox.setSpacing(0)
 
-        btn_name_list = ['delete', 'update', 'copy']
+        btn_name_list = ['Delete', 'Update', 'Copy']
         btn_click_event_list = [self.__delete, self.__update, self.__copy]
 
         for btn_name, btn_objname, btn_click_event in zip(btn_name_list,
@@ -241,7 +241,7 @@ class TableWidget(QWidget):
         :return:
         """
         btn = self.group.checkedButton()
-        self.change_signal.emit(btn.etext())
+        self.change_signal.emit(btn.text())
 
         self.data_show()
 
@@ -261,7 +261,7 @@ class TableWidget(QWidget):
 
     def __finally_page(self):
 
-        total_page = self.total_page.text()[1:-1]
+        total_page = self.total_page.text().split(' ')[1]
         buttons = self.group.buttons()
 
         if int(total_page) <= 5:
@@ -300,7 +300,7 @@ class TableWidget(QWidget):
 
     def __next_page(self):
 
-        total_page = self.total_page.text()[1:-1]
+        total_page = self.total_page.text().split(' ')[1]
         buttons = self.group.buttons()
 
         for b in buttons:
@@ -325,7 +325,7 @@ class TableWidget(QWidget):
 
     def __confirm_skip(self):
 
-        total_page = self.total_page.text()[1:-1]
+        total_page = self.total_page.text().split(' ')[1]
         buttons = self.group.buttons()
 
         page = self.skip_page.text()

@@ -1,3 +1,5 @@
+import sqlite3
+
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (
@@ -20,6 +22,7 @@ class Window(QMainWindow):
     pk_page = pyqtSignal()
     your_log_page = pyqtSignal()
 
+    conn = sqlite3.connect(wc.WORDLIST_PATH)
 
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)

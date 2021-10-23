@@ -3,7 +3,7 @@ import os
 WORK_PATH = os.getcwd()
 QSSTOOL_PATH = os.path.join(WORK_PATH, 'QSSTool')
 ICON_PATH = os.path.join(os.path.join(WORK_PATH, 'resource'), 'images')
-
+DATABASE_PATH = os.path.join(os.path.join(WORK_PATH, 'resource'), 'database')
 
 class WindowConstants:
     """
@@ -13,6 +13,7 @@ class WindowConstants:
     WINDOW_WORK_PATH = WORK_PATH
     WINDOW_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'window.qss')
     WINDOW_ICON_PATH = os.path.join(ICON_PATH, 'keyboard.svg')
+    WORDLIST_PATH = os.path.join(DATABASE_PATH, 'wordlist.db')
 
     WINDOW_WELCOME_MESSAGE = 'Typing Exercise help you speed up! This is v0.1~'
     WINDOW_TITLE = 'Typing Exercise'
@@ -42,8 +43,8 @@ class WordsTableConstants:
 
     TABLE_HEADER_LIST = ['Word', 'translation', 'operate']
 
-    TABLE_HEADER_HEIGHT = 29
-    TABLE_ROW_HEIGHT = 39
+    TABLE_HEADER_HEIGHT = 56
+    TABLE_ROW_HEIGHT = 60
 
 
 class SearchConstants:

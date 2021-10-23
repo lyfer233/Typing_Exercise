@@ -17,30 +17,30 @@ class GetWord:
             return data
 
         try:
-            with conn.cursor() as cur:
-                sql = 'SELECT word, translation FROM word WHERE is_delete=0 AND id>%s LIMIT'.format((page - 1) * 8)
-
-                cur.execute(sql)
-                data = cur.fetchall()
-
-            conn.commit()
+            cur = conn.cursor()
+            sql = 'SELECT word, translation FROM word WHERE is_delete=0 AND ROWID>{} LIMIT 12'.format((page - 1) * 8)
+            cur.execute(sql)
+            data = tuple(cur.fetchall())
 
         except:
             conn.rollback()
+
+        return data
 
     @staticmethod
     def all_count(conn):
 
         count = 0
         try:
-            with conn.cursor() as cur:
-                sql = 'select COUNT(*) from word WHERE is_delete=0'
-                cur.execute(sql)
-                count = cur.fetchone()[0]
+            cur = conn.cursor()
+            sql = 'select COUNT(*) FROM word WHERE is_delete=0'
+            cur.execute(sql)
+            count = cur.fetchone()[0]
 
-            conn.commit()
         except:
             conn.rollback()
+
+        return count
 
 class UpdateMean:
     """
@@ -58,7 +58,7 @@ class UpdateMean:
         status = 0
         try:
             with conn.cursor() as cur:
-                sql = 'UPDATE word SET translation="%s" where word="%s"'.format(means, word)
+                sql = 'UPDATE word SET translation={} where word={}'.format(means, word)
                 status = cur.execute(sql)
 
             conn.commit()
@@ -75,7 +75,7 @@ class DeleteWord:
 
         try:
             with conn.cursor() as cur:
-                sql = 'UPDATE word set is_delete=1 WHERE word="%s"'.format(word)
+                sql = 'UPDATE word set is_delete=1 WHERE word={}'.format(word)
                 status = cur.execute(sql)
 
             conn.commit()
