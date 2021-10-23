@@ -34,7 +34,7 @@ class WordsExercisePageConstants:
 
 
 class WordsTableConstants:
-    TABLE_QSS_FILE_PATH = os.path.join(WORK_PATH, 'wordstable.qss')
+    TABLE_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'wordstable.qss')
 
     TABLE_DATA_SHOW_COUNT = 10  # it show data on the per page.
     TABLE_DEFAULT_ROW = 10

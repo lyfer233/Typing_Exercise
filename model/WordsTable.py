@@ -10,8 +10,8 @@ from PyQt5.QtCore import Qt
 from QSSTool import QSSTool
 from constants import WordsTableConstants as wtc
 
-class TableWidget(QWidget):
 
+class TableWidget(QWidget):
     # store event signal
     delete_signal = pyqtSignal(str)
     update_signal = pyqtSignal(str, str)
@@ -59,7 +59,7 @@ class TableWidget(QWidget):
         # auto resize mode to fill reminder space
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # config the height of table header
-        self.table.horizontalHeader().setFixedSize(wtc.TABLE_HEADER_HEIGHT)
+        self.table.horizontalHeader().setFixedHeight(wtc.TABLE_HEADER_HEIGHT)
         # only select one column
         self.table.setSelectionMode(QAbstractItemView.SingleSelection)
         # nothing edit data
@@ -71,9 +71,10 @@ class TableWidget(QWidget):
             # config the height of column
             self.table.setRowHeight(i, wtc.TABLE_ROW_HEIGHT)
 
-        vbox.addWidget(self.table)
-
         self.data_show()
+
+        vbox.addWidget(self.table)
+        vbox.addLayout(self.page_layout())
 
         return vbox
 
@@ -95,7 +96,7 @@ class TableWidget(QWidget):
         page5 = QPushButton("5")
         next_page = QPushButton("Next>")
         finally_page = QPushButton("End")
-        self.total_page = QLabel("Total" + str(self.page) + "Pages")
+        self.total_page = QLabel("Total " + str(self.page) + " Pages")
         skip_to = QLabel("Jump to")
         self.skip_page = QLineEdit()
         skip_page_to = QLabel("Page")
@@ -108,8 +109,7 @@ class TableWidget(QWidget):
             self.group.addButton(b)
             b.setCheckable(True)
             b.clicked.connect(self.changeTableContent)
-
-        self.group.buttons()[0].setChecked(True) # default state is 1
+        self.group.buttons()[0].setChecked(True)  # default state is 1
 
         btn_list += [
             home_page, last_page, finally_page, next_page,
@@ -155,12 +155,12 @@ class TableWidget(QWidget):
         btn_click_event_list = [self.__delete, self.__update, self.__copy]
 
         for btn_name, btn_objname, btn_click_event in zip(btn_name_list,
-                                                         btn_name_list,
-                                                         btn_click_event_list):
+                                                          btn_name_list,
+                                                          btn_click_event_list):
             btn = QPushButton(btn_name)
             btn.setObjectName(btn_objname)
             btn.clicked.connect(btn_click_event)
-            btn.setMinimumSize(50, 39)
+            btn.setMinimumSize(50, 40)
             btn.setCursor(Qt.PointingHandCursor)
             btn.row = row
 
@@ -175,7 +175,7 @@ class TableWidget(QWidget):
         delete operator clicked event
         :return:
         """
-        row = self.sender().row # find which row send signal
+        row = self.sender().row  # find which row send signal
         word = self.table.item(row, 0).text()
         self.delete_signal.emit(word)
         self.changeTableContent()
@@ -185,7 +185,7 @@ class TableWidget(QWidget):
         update operator clicked event
         :return:
         """
-        row = self.sender().row # find which row send signal
+        row = self.sender().row  # find which row send signal
         word = self.table.item(row, 0).text()
         text, change_text = QInputDialog(self, 'update', 'input your update content: ',
                                          QLineEdit.Normal, "")
@@ -297,7 +297,6 @@ class TableWidget(QWidget):
             buttons[index - 1].setChecked(True)
 
         self.changeTableContent()
-
 
     def __next_page(self):
 

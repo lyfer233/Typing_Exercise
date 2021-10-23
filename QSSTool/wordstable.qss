@@ -1,3 +1,29 @@
+QMainWindow {
+    min-width: 1280px;
+    min-height: 720px;
+    max-width: 1280px;
+    max-height: 720px;
+}
+
+#left_btn {
+    width: 160px;
+    height: 60px;
+    margin-left: 15px;
+    font: 400 15px 黑体;
+    border-radius: 5px;
+    background-color: #FFEFD5;
+}
+
+#left_btn:checked {
+    width: 160px;
+    height: 60px;
+    margin-left: 15px;
+    font: 400 15px 黑体;
+    border-radius: 5px;
+    background-color: #FF8C00;
+    color: wheat;
+}
+
 QTableWidget {
     background-color:rgb(240,240,240);
     color: #1A1A1A;
