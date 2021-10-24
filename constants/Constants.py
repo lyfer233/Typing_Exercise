@@ -33,6 +33,7 @@ class WordsExercisePageConstants:
     WORDS_EXERCISE_PAGE_QSS_FILE_START_ICON_PATH = os.path.join(ICON_PATH, 'start.svg')
     WORDS_EXERCISE_PAGE_QSS_FILE_PAUSE_ICON_PATH = os.path.join(ICON_PATH, 'pause.svg')
     WORDS_EXERCISE_PAGE_QSS_FILE_CURTAIN_ICON_PATH = os.path.join(ICON_PATH, 'curtain.svg')
+    TIME_INTERVAL = 1000
 
 
 class WordsTableConstants:

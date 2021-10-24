@@ -12,6 +12,10 @@ System Environment: Windows 11
 
 Improve typing speed and memorize words by inputting words.
 
+#### Word Table (Finished)
+
+Browse the word list, and support functions such as copy and delete
+
 #### Articles Exercise (TODO)
 
 By inputting a short passage, you can improve your English input speed in the real situation.

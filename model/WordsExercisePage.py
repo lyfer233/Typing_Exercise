@@ -1,10 +1,8 @@
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer
-from PyQt5.QtGui import QIcon, QPalette, QPixmap
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QMainWindow, QPushButton,
-    QDesktopWidget, QHBoxLayout, QVBoxLayout, QAction,
-    QButtonGroup, qApp, QLabel, QToolButton
+    QHBoxLayout, QVBoxLayout, QLabel, QToolButton, QTableWidget, QTableWidgetItem, QGridLayout
 )
 
 from QSSTool import QSSTool
@@ -18,9 +16,18 @@ data = ()
 
 class WordsExercisePage(Window):
 
+    __timer = 0
+    __input_number = 0
+    __speed = 0
+    __correct = 0
+    __accuracy = 0
+    __calc = QTimer()
+    sum_str_len = []
+
     def __init__(self, parent=None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.receive_data()
+        self.__calc.timeout.connect(self.calc_data)
         self.initUI()
 
     def initUI(self):
@@ -45,29 +52,34 @@ class WordsExercisePage(Window):
 
         return hbox
 
-    def stop_show(self):
-        ...
-
     def word_show(self):
         self.word_area = QVBoxLayout()
 
         self.word = InputWord("start")
         self.word.setObjectName("inputword")
+        self.word.setAlignment(Qt.AlignCenter)
         self.translation = QLabel('input "start" to start')
         self.translation.setObjectName("translation")
+        self.translation.setAlignment(Qt.AlignCenter)
         self.word_area.addStretch()
         self.word_area.addWidget(self.word)
+        self.word_area.addSpacing(20)
         self.word_area.addWidget(self.translation)
         self.word_area.addStretch()
 
         return self.word_area
 
     def statistic_information(self):
-        hbox = QHBoxLayout()
+        self.grid = QGridLayout()
+        names = ['time', 'input number', 'speed', 'correct', 'accuracy',]
+        positions = [(0, i) for i in range(5)]
 
-        hbox.addWidget(QLabel("PlaceHolder"))
+        for positions, name in zip(positions, names):
+            label = QLabel(name)
+            self.grid.addWidget(label, *positions)
 
-        return hbox
+        self.update_grid_data()
+        return self.grid
 
     def right_layout(self):
         vbox = QVBoxLayout()
@@ -77,9 +89,9 @@ class WordsExercisePage(Window):
         vbox.addLayout(self.statistic_information())
 
         # divide these into 1/6, 1/2, 1/3 size
-        # vbox.setStretch(1, 1)
-        # vbox.setStretch(2, 3)
-        # vbox.setStretch(3, 2)
+        vbox.setStretch(1, 2)
+        vbox.setStretch(2, 1)
+        vbox.setStretch(3, 2)
 
         return vbox
 
@@ -88,20 +100,39 @@ class WordsExercisePage(Window):
         if self.start_and_stop_btn.isChecked():
             self.start_and_stop_btn.setIcon(QIcon(wepc.WORDS_EXERCISE_PAGE_QSS_FILE_START_ICON_PATH))
             self.start_and_stop_btn.setChecked(True)
+            self.__calc.start(wepc.TIME_INTERVAL)
             self.word.recovery_status()
             self.grabKeyboard()
         else:
             self.start_and_stop_btn.setIcon(QIcon(wepc.WORDS_EXERCISE_PAGE_QSS_FILE_PAUSE_ICON_PATH))
             self.start_and_stop_btn.setChecked(False)
+            self.__calc.stop()
             self.word.save_status()
             self.releaseKeyboard()
 
     def receive_data(self):
         global data
         data = QueryWord.from_db(self.conn)
+        self.sum_str_len.append(0)
+        for i in range(len(data)):
+            self.sum_str_len.append(self.sum_str_len[i] + len(data[i][0]))
 
     def keyPressEvent(self, QKeyEvent) -> None:
-        self.word.receive_key(QKeyEvent.key(), translation=self.translation)
+        self.__input_number += 1
+        self.word.receive_key(QKeyEvent.key(), translation=self.translation, my_timer=self.__calc)
+
+    def calc_data(self):
+        self.__timer += wepc.TIME_INTERVAL
+        self.__correct += self.sum_str_len[data_count]
+        self.__accuracy = self.__correct / self.__input_number
+        self.__speed = self.__correct / (self.__timer / 1000)
+
+    def update_grid_data(self):
+        self.grid.addWidget(QLabel("{}s".format(self.__timer // 1000)), 1, 0)
+        self.grid.addWidget(QLabel(str(self.__input_number)), 1, 1)
+        self.grid.addWidget(QLabel(str(self.__speed)), 1, 2)
+        self.grid.addWidget(QLabel(str(self.__correct)), 1, 3)
+        self.grid.addWidget(QLabel(str(self.__accuracy)), 1, 4)
 
 
 class InputWord(QLabel):
@@ -112,10 +143,10 @@ class InputWord(QLabel):
         super().__init__()
         self.__raw_text = input_word
         self.setText("<font color=gray>{}</font>".format(input_word))
-        self.setStyleSheet("font: 400 60px Cascadia Mono ExtraLight")
+        self.setStyleSheet("font: 400 80px Cascadia Mono ExtraLight")
         self.show()
 
-    def receive_key(self, key, translation):
+    def receive_key(self, key, translation, my_timer):
         if 65 <= key <= 90 or 97 <= key <= 122:
             if chr(key).lower() == self.__raw_text[self.pos]:
                 self.correct_char()
@@ -126,6 +157,8 @@ class InputWord(QLabel):
             return
 
         if self.pos >= len(self.__raw_text):
+            if not my_timer.isActive():
+                my_timer.start(wepc.TIME_INTERVAL)
             global data_count
             if data_count >= len(data):
                 self.close()
@@ -166,7 +199,6 @@ class InputWord(QLabel):
         self.tmp_text = self.text()
         self.setText("")
         self.setPixmap(QPixmap(wepc.WORDS_EXERCISE_PAGE_QSS_FILE_CURTAIN_ICON_PATH))
-
 
     def recovery_status(self):
         print(self.tmp_text)
