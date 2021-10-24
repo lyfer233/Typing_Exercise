@@ -104,6 +104,7 @@ class QueryWord:
             sql = 'SELECT word, translation FROM word WHERE is_delete=0 ORDER BY RANDOM() LIMIT 20'
             cur.execute(sql)
             data = cur.fetchall()
+            cur.close()
         except:
             conn.rollback()
 

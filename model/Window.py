@@ -149,3 +149,6 @@ class Window(QMainWindow):
 
     def __your_log_page(self):  # send log page signal
         self.your_log_page.emit()
+
+    def __del__(self):
+        self.conn.close()

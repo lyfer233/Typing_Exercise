@@ -1,6 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtCore import Qt, pyqtSignal, QTimer
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPalette, QPixmap
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QMainWindow, QPushButton,
     QDesktopWidget, QHBoxLayout, QVBoxLayout, QAction,
@@ -14,6 +14,7 @@ from constants import WordsExercisePageConstants as wepc
 
 data_count = 0
 data = ()
+
 
 class WordsExercisePage(Window):
 
@@ -48,16 +49,18 @@ class WordsExercisePage(Window):
         ...
 
     def word_show(self):
-        vbox = QVBoxLayout()
+        self.word_area = QVBoxLayout()
 
-        word = InputWord("start")
-        translation = QLabel("输入start以开始")
-        vbox.addStretch()
-        vbox.addWidget(word)
-        vbox.addWidget(translation)
-        vbox.addStretch()
+        self.word = InputWord("start")
+        self.word.setObjectName("inputword")
+        self.translation = QLabel('input "start" to start')
+        self.translation.setObjectName("translation")
+        self.word_area.addStretch()
+        self.word_area.addWidget(self.word)
+        self.word_area.addWidget(self.translation)
+        self.word_area.addStretch()
 
-        return vbox
+        return self.word_area
 
     def statistic_information(self):
         hbox = QHBoxLayout()
@@ -65,7 +68,6 @@ class WordsExercisePage(Window):
         hbox.addWidget(QLabel("PlaceHolder"))
 
         return hbox
-
 
     def right_layout(self):
         vbox = QVBoxLayout()
@@ -82,22 +84,30 @@ class WordsExercisePage(Window):
         return vbox
 
     def change_btn_state(self):
+        global data_count
         if self.start_and_stop_btn.isChecked():
             self.start_and_stop_btn.setIcon(QIcon(wepc.WORDS_EXERCISE_PAGE_QSS_FILE_START_ICON_PATH))
             self.start_and_stop_btn.setChecked(True)
+            self.word.recovery_status()
+            self.grabKeyboard()
         else:
             self.start_and_stop_btn.setIcon(QIcon(wepc.WORDS_EXERCISE_PAGE_QSS_FILE_PAUSE_ICON_PATH))
             self.start_and_stop_btn.setChecked(False)
+            self.word.save_status()
+            self.releaseKeyboard()
 
     def receive_data(self):
         global data
         data = QueryWord.from_db(self.conn)
 
     def keyPressEvent(self, QKeyEvent) -> None:
-        pass
+        self.word.receive_key(QKeyEvent.key(), translation=self.translation)
+
 
 class InputWord(QLabel):
     pos = 0
+    tmp_text = ""
+
     def __init__(self, input_word):
         super().__init__()
         self.__raw_text = input_word
@@ -105,13 +115,15 @@ class InputWord(QLabel):
         self.setStyleSheet("font: 400 60px Cascadia Mono ExtraLight")
         self.show()
 
-    def keyPressEvent(self, QKeyEvent):
-        if str.isalpha(chr(QKeyEvent.key())):
-            if chr(QKeyEvent.key()).lower() == self.__raw_text[self.pos]:
+    def receive_key(self, key, translation):
+        if 65 <= key <= 90 or 97 <= key <= 122:
+            if chr(key).lower() == self.__raw_text[self.pos]:
                 self.correct_char()
                 self.pos += 1
             else:
-                self.incorrect_char(chr(QKeyEvent.key()).lower())
+                self.incorrect_char(chr(key).lower())
+        else:
+            return
 
         if self.pos >= len(self.__raw_text):
             global data_count
@@ -121,10 +133,10 @@ class InputWord(QLabel):
             self.pos = 0
             self.__raw_text = data[data_count][0]
             self.setText("<font color=gray>{}</font>".format(data[data_count][0]))
+            translation.setText(data[data_count][1])
             data_count += 1
 
             # next_word(want_delete=self)
-
 
     def correct_char(self):
         self.setText(
@@ -149,3 +161,13 @@ class InputWord(QLabel):
 
     def refresh(self):
         self.setText("<font color=gray>{}</font>".format(self.__raw_text))
+
+    def save_status(self):
+        self.tmp_text = self.text()
+        self.setText("")
+        self.setPixmap(QPixmap(wepc.WORDS_EXERCISE_PAGE_QSS_FILE_CURTAIN_ICON_PATH))
+
+
+    def recovery_status(self):
+        print(self.tmp_text)
+        self.setText(self.tmp_text)

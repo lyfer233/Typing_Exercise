@@ -29,3 +29,7 @@ QMainWindow {
     height: 300px;
     border-style: flat;
 }
+
+#translation {
+    font: 100 20px 黑体;
+}
