@@ -10,6 +10,6 @@ from slot import QueryWord
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    e = WordSearchUI()
+    e = WordsExercisePage()
     e.show()
     sys.exit(app.exec_())

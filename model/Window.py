@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (
     QWidget, QMainWindow, QPushButton,
-    QDesktopWidget, QHBoxLayout, QVBoxLayout, QButtonGroup
+    QDesktopWidget, QHBoxLayout, QVBoxLayout, QButtonGroup, QMessageBox
 )
 
 from QSSTool import QSSTool
@@ -116,6 +116,17 @@ class Window(QMainWindow):
         hbox.setStretch(2, 7)
 
         widget.setLayout(hbox)
+
+    def closeEvent(self, event) -> None:
+        reply = QMessageBox.question(self,
+                                     'Exit',
+                                     'Your app will exit, are you sure?',
+                                     QMessageBox.Yes | QMessageBox.No,
+                                     QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 
     '''
     These are signal function area

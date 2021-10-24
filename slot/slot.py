@@ -100,12 +100,10 @@ class QueryWord:
 
         data = ()
         try:
-            with conn.cursor() as cur:
-                # query word
-                sql = 'SELECT word, translation FROM word WHERE is_delete=0 ORDER BY RANDOM() LIMIT 20'
-
-                cur.execute(sql)
-                data = cur.fetchall()
+            cur = conn.cursor()
+            sql = 'SELECT word, translation FROM word WHERE is_delete=0 ORDER BY RANDOM() LIMIT 20'
+            cur.execute(sql)
+            data = cur.fetchall()
         except:
             conn.rollback()
 
