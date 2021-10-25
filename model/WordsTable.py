@@ -46,8 +46,10 @@ class TableWidget(QWidget):
 
     def __layout(self):
         """
-        This is method different with Windows.py
-        :return:
+        This is method different with Windows.py.
+        it cover a QVBoxLayout that have table.
+
+        :return: QVBoxLayout()
         """
 
         vbox = QVBoxLayout()
@@ -80,8 +82,9 @@ class TableWidget(QWidget):
 
     def page_layout(self):
         """
-        layout of table at the page tail
-        :return:
+        Layout of table at the page tail and these are button about page.
+
+        :return: QHBoxLayout()
         """
 
         hbox = QHBoxLayout()
@@ -196,8 +199,7 @@ class TableWidget(QWidget):
 
     def __copy(self):
         """
-        copy operator clicked evnet
-        :return:
+        Copy content into your clipboard.
         """
         row = self.sender().row
         clipboard = QApplication.clipboard()
@@ -211,8 +213,7 @@ class TableWidget(QWidget):
 
     def data_show(self):
         """
-        show the data in per page
-        :return:
+        Show the data in per page.
         """
 
         self.table.clearContents()
@@ -238,7 +239,6 @@ class TableWidget(QWidget):
     def changeTableContent(self):
         """
         send signal that current content of the page table is update
-        :return:
         """
         btn = self.group.checkedButton()
         self.change_signal.emit(btn.text())
@@ -248,7 +248,6 @@ class TableWidget(QWidget):
     def __home_page(self):
         """
         when click first button then send signal
-        :return:
         """
 
         buttons = self.group.buttons()

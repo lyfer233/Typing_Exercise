@@ -12,7 +12,9 @@ from constants import WindowConstants as wc
 
 
 class Window(QMainWindow):
-    # TODO(lyfer): Adding the Window class comment
+    """
+    Class Windows is base class of all page, it provides left layout and
+    """
 
     # pages switch signal
     main_page_signal = pyqtSignal()
@@ -41,7 +43,7 @@ class Window(QMainWindow):
 
     def center(self):
         """
-        Take the windows into your center of screen
+        Take the Windows into your center of screen.
 
         :return: None
         """
@@ -58,7 +60,7 @@ class Window(QMainWindow):
 
     def left_layout(self):
         """
-        Main Window left bar layout
+        Main Window left bar layout and it have six button that they are can click.
 
         :return: QVBoxLayout
         """
@@ -118,6 +120,9 @@ class Window(QMainWindow):
         widget.setLayout(hbox)
 
     def closeEvent(self, event) -> None:
+        """
+        To avoid careless click X, adding a double-check method.
+        """
         reply = QMessageBox.question(self,
                                      'Exit',
                                      'Your app will exit, are you sure?',
@@ -128,9 +133,9 @@ class Window(QMainWindow):
         else:
             event.ignore()
 
-    '''
+    """    
     These are signal function area
-    '''
+    """
 
     def __main_page(self):  # send the main page signal
         self.main_page_signal.emit()
@@ -150,5 +155,5 @@ class Window(QMainWindow):
     def __your_log_page(self):  # send log page signal
         self.your_log_page.emit()
 
-    def __del__(self):
+    def __del__(self): # close connection with database while the object was deleted.
         self.conn.close()

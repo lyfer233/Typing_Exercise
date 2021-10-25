@@ -8,7 +8,7 @@ System Environment: Windows 11
 
 ## Function
 
-#### Word Exercise (Developing)
+#### Word Exercise (Finished)
 
 Improve typing speed and memorize words by inputting words.
 

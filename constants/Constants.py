@@ -6,11 +6,7 @@ ICON_PATH = os.path.join(os.path.join(WORK_PATH, 'resource'), 'images')
 DATABASE_PATH = os.path.join(os.path.join(WORK_PATH, 'resource'), 'database')
 
 class WindowConstants:
-    """
-    TODO(lyfer): Adding the WindowConstants class comment
-    Attributes:
-    """
-    WINDOW_WORK_PATH = WORK_PATH
+
     WINDOW_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'window.qss')
     WINDOW_ICON_PATH = os.path.join(ICON_PATH, 'keyboard.svg')
     WORDLIST_PATH = os.path.join(DATABASE_PATH, 'wordlist.db')
@@ -24,15 +20,18 @@ class WindowConstants:
 
 
 class MainPageConstants:
+
     MAINPAGE_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'mainpage.qss')
     MAINPAGE_WELCOME = 'Welcome typing exercise!'
 
 
 class WordsExercisePageConstants:
+
     WORDS_EXERCISE_PAGE_QSS_FILE_PATH = os.path.join(QSSTOOL_PATH, 'words_exercise_page.qss')
     WORDS_EXERCISE_PAGE_QSS_FILE_START_ICON_PATH = os.path.join(ICON_PATH, 'start.svg')
     WORDS_EXERCISE_PAGE_QSS_FILE_PAUSE_ICON_PATH = os.path.join(ICON_PATH, 'pause.svg')
     WORDS_EXERCISE_PAGE_QSS_FILE_CURTAIN_ICON_PATH = os.path.join(ICON_PATH, 'curtain.svg')
+    # QTimer will check time
     TIME_INTERVAL = 1000
 
 
